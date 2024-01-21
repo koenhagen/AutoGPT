@@ -159,11 +159,7 @@ jobs:
         uses: koenhagen/measure-energy-action@v0.27
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-            poetry run pytest -vv \
-            --cov=autogpt --cov-branch --cov-report term-missing --cov-report xml \
-            --numprocesses=logical --durations=10 \
-            tests/unit tests/integration
+          run: cd autogpts/autogpt;poetry run pytest -vv --numprocesses=logical --durations=10 tests/unit tests/integration
           count: 10
         env:
           CI: true
