@@ -156,11 +156,15 @@ jobs:
           poetry install
 
       - name: Run pytest with coverage
-        run: |
-          poetry run pytest -vv \
+        uses: koenhagen/measure-energy-action@v0.27
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            poetry run pytest -vv \
             --cov=autogpt --cov-branch --cov-report term-missing --cov-report xml \
             --numprocesses=logical --durations=10 \
             tests/unit tests/integration
+          count: 10
         env:
           CI: true
           PLAIN_OUTPUT: True
